@@ -1,0 +1,105 @@
+#-------------------------------------------------------------------------------------
+# StyleXfer – "Adaptive Neural Style Transfer" project dependencies
+
+# Install with:
+#     pip install -r requirements.txt
+
+#-------------------------------------------------------------------------------------
+
+# Flask ecosystem :-
+Flask==3.1.2
+Flask_Bootstrap==3.3.7.1
+flask_wtf==1.2.2
+Werkzeug==3.1.4
+WTForms==3.2.1
+
+
+numpy>=1.24,<2.0
+
+# Image Processing :-
+Pillow==12.0.0
+
+
+# PyTorch stack :-
+# torch==2.12.0+cpu
+# --extra-index-url https://download.pytorch.org/whl/cpu
+# Here this Tells pip to look at the official PyTorch wheel repository for CPU builds. Without this, pip may not find the +cpu variants.
+
+torch==2.2.2
+torchvision==0.17.2
+
+tqdm==4.66.4      # Used for progress bar utility
+
+gunicorn
+
+
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Here we need to named this file as "requirements.txt" only because it is convention
+# As during deployment using Streamlit or any other framework, they generally searches for this 'requirements.txt' file to install all the libraries required 
+# A requirements.txt file is used to list all the Python packages your project depends on, so anyone can recreate the same environment easily.
+
+# To recreate the environment on another machine :-
+#---------------OR---------------------
+# To install the libraries that we want, we can write them in this "requirements.txt" file then do this :-
+# pip install -r requirements.txt
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Flask :-
+# A lightweight Python web framework. we are using it to build the web interface (Flask, render_template, request, etc.) for uploading images and running style transfer.
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Flask_Bootstrap :-
+# Integrates Bootstrap (CSS/JS framework) with Flask templates. 
+# This gives our web app a polished, responsive UI without writing raw CSS.
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# flask_wtf :- 
+# Adds support for forms in Flask using WTForms. we are using it for file upload forms (FlaskForm, FileField, SubmitField, etc.).
+# Extension that integrates WTForms with Flask. It simplifies form handling (upload fields, validation, CSRF protection). You’re using it for FlaskForm and FileField
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Werkzeug :-
+# A core library Flask depends on for routing, request handling, and utilities like secure_filename.
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# WTForms :-
+# Provides form field classes and validators (FileField, FloatField, InputRequired, etc.) used in our upload and parameter forms.
+# A form library. Provides the actual form field classes (FileField, FloatField, SubmitField) and validators (InputRequired). Flask-WTF builds on this.
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Pillow :-
+# The Python Imaging Library fork. 
+# We are using it to load, save, and manipulate images (PIL.Image.open, resizing, etc.). 
+# Essential for handling input/output images in our project.
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# torch :-
+# The main deep learning framework. Provides tensors, autograd, optimizers, and neural network modules. Our AdaIN implementation (VGGEncoder, Decoder) is built on this.
+
+# torchvision :-
+# Companion library for PyTorch. 
+# Provides image transforms (torchvision.transforms), datasets, and utilities like save_image.
+# Crucial for preprocessing and saving styled outputs.
+
+#  Note: If you want CPU-only builds, you’d specify torch==2.12.0+cpu and add
+# --extra-index-url https://download.pytorch.org/whl/cpu  
+# so pip knows where to fetch the special CPU wheels. Otherwise, pip defaults to GPU builds if CUDA is available.
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# tqdm :-
+# A progress bar library. 
+# We’re using it to visualize loops (e.g., training epochs, batch processing). It makes long-running tasks user-friendly.
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# gunicorn :- 
+# A production-grade WSGI HTTP server. 
+# Flask’s built-in server is fine for local dev, but not secure or scalable. 
+# Gunicorn is used when deploying our app to platforms like Heroku, Render, or Docker — it runs Flask in a robust, multi-worker environment.
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
