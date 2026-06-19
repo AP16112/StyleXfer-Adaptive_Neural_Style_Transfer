@@ -1,3 +1,20 @@
+---
+title: StyleXfer : Adaptive Neural Style Transfer
+emoji: 🎨
+colorFrom: indigo
+colorTo: purple
+sdk: docker
+sdk_version: 0.0.1
+app_file: StyleXfer_NST_code/app.py
+pinned: false
+python_version: '3.12'
+tags:
+- neural-style-transfer
+- computer-vision
+- deep-learning
+- huggingface-spaces
+---
+
 # StyleXfer: Adaptive Neural Style Transfer
 
 ![Platform](https://img.shields.io/badge/Platform-Web-blue)
