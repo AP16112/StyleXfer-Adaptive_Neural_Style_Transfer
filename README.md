@@ -152,46 +152,57 @@ The application supports:
 StyleXfer/
 |-- README.md
 |-- requirements.txt
-|-- Procfile.txt
+|-- Dockerfile
 |-- .gitignore
-|-- .env
+|-- .env (optional for local development)
+|-- assets/
+|   |-- home.png
+|   |-- examples.png
+|   |-- stylized_image.png
 |-- StyleXfer_NST_code/
-|   |-- app.py
-|   |-- train.py
-|   |-- vgg_normalised.pth
-|   |-- adain_algorithm.png
+|   |-- app.py                    # Flask web app (main entry point)
+|   |-- train.py                  # Training script for decoder
+|   |-- vgg_normalised.pth        # Pretrained VGG encoder weights
+|   |-- adain_algorithm.png       # AdaIN algorithm visualization
 |   |-- templates/
-|   |   |-- index.html
+|   |   |-- index.html            # Web interface (HTML, CSS, JS)
 |   |-- utils/
-|   |   |-- models.py
-|   |   |-- utils.py
-|   |-- examples/
-|   |-- content_data_examples/
-|   |-- style_data_examples/
-|   |-- content_dataset/
-|   |-- style_dataset/
+|   |   |-- models.py             # VGG encoder and decoder architectures
+|   |   |-- utils.py              # AdaIN, dataset loaders, utility functions
 |   |-- static/
-|   |   |-- uploads/
+|   |   |-- uploads/              # User uploads and generated outputs
+|   |-- examples/                 # Static example images
 |   |-- experiment/
-|       |-- final_training/
-|           |-- decoder_final.pth
-|           |-- args.txt
+|   |   |-- experiment1/          # First training run checkpoints
+|   |   |-- experiment2/          # Second training run checkpoints
+|   |   |-- final_training/       # Final production model
+|   |       |-- decoder_final.pth # Final trained decoder
+|   |       |-- args.txt          # Training configuration
+|   |-- content_data_examples/    # Example content images
+|   |-- style_data_examples/      # Example style images
+|   |-- content_dataset/          # Training content dataset
+|   |-- style_dataset/            # Training style dataset
 ```
 
 ## Important Files
 
-- `StyleXfer_NST_code/app.py` - Flask application entrypoint, upload handling, inference route, model loading, and image serving routes.
-- `StyleXfer_NST_code/train.py` - training driver for the AdaIN decoder.
-- `StyleXfer_NST_code/utils/models.py` - VGG encoder and decoder model architecture.
-- `StyleXfer_NST_code/utils/utils.py` - dataset loader, transforms, AdaIN function, and feature statistics helpers.
-- `StyleXfer_NST_code/templates/index.html` - complete web interface with upload form, previews, examples, footer, CSS, and JavaScript.
-- `StyleXfer_NST_code/vgg_normalised.pth` - pretrained normalized VGG weights used by the encoder.
-- `StyleXfer_NST_code/experiment/final_training/decoder_final.pth` - trained decoder weights used for inference.
-- `StyleXfer_NST_code/examples/` - static demo images shown in the app.
-- `StyleXfer_NST_code/static/uploads/` - runtime folder for user uploads and generated outputs.
-- `requirements.txt` - Python dependencies.
-- `Procfile` - Gunicorn startup command for deployment platforms.
-- `.env` - local environment variables. This file should not be pushed to GitHub.
+| File/Folder | Purpose |
+|---|---|
+| `Dockerfile` | Container configuration for Hugging Face Spaces deployment |
+| `README.md` | Project documentation and deployment guide |
+| `requirements.txt` | Python dependencies (Flask, PyTorch, Pillow, etc.) |
+| `assets/` | Demo screenshots (home.png, examples.png, stylized_image.png) |
+| `StyleXfer_NST_code/app.py` | Flask web application - main entry point, routes, and inference |
+| `StyleXfer_NST_code/train.py` | Training script for the AdaIN decoder network |
+| `StyleXfer_NST_code/templates/index.html` | Web interface with upload form, image previews, and output display |
+| `StyleXfer_NST_code/utils/models.py` | VGG encoder and decoder neural network architectures |
+| `StyleXfer_NST_code/utils/utils.py` | AdaIN implementation, dataset loaders, and utility functions |
+| `StyleXfer_NST_code/vgg_normalised.pth` | Pretrained VGG-19 encoder weights (frozen during inference) |
+| `StyleXfer_NST_code/experiment/final_training/decoder_final.pth` | Trained decoder model used for style transfer inference |
+| `StyleXfer_NST_code/experiment/final_training/args.txt` | Training configuration and hyperparameters for final model |
+| `StyleXfer_NST_code/examples/` | Static example images for demonstration |
+| `StyleXfer_NST_code/static/uploads/` | Runtime directory for user uploads and generated outputs |
+| `.env` | Local environment variables (not pushed to repository) |
 
 ## How It Works
 
