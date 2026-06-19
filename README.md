@@ -81,9 +81,7 @@ StyleXfer solves this by providing:
 
 The application supports:
 
-- content image upload
-- style image upload
-- image preview before processing
+- content & style image upload
 - file validation for `png`, `jpg`, and `jpeg`
 - AdaIN feature transformation
 - trained decoder-based image generation
@@ -104,13 +102,6 @@ The application supports:
 - custom decoder network for image reconstruction
 - Adaptive Instance Normalization implementation
 - style strength control through `alpha`
-- server-side image validation and secure filenames
-- local image preview using JavaScript `FileReader`
-- loading overlay while inference is running
-- reusable training script with checkpoint saving
-- custom PyTorch image folder dataset
-- support for resuming decoder training
-- example content, style, and output gallery
 
 ## Tech Stack
 
@@ -149,11 +140,6 @@ StyleXfer/
 |   |   |-- models.py
 |   |   |-- utils.py
 |   |-- examples/
-|   |   |-- brad_pitt.jpg
-|   |   |-- sketch.png
-|   |   |-- picasso_seated_nude_hr.jpg
-|   |   |-- stylized_brad_pitt.jpg
-|   |   |-- stylized_brad_pitt (1).jpg
 |   |-- content_data_examples/
 |   |-- style_data_examples/
 |   |-- content_dataset/
@@ -178,7 +164,7 @@ StyleXfer/
 - `StyleXfer_NST_code/examples/` - static demo images shown in the app.
 - `StyleXfer_NST_code/static/uploads/` - runtime folder for user uploads and generated outputs.
 - `requirements.txt` - Python dependencies.
-- `Procfile.txt` - Gunicorn startup command for deployment platforms.
+- `Procfile` - Gunicorn startup command for deployment platforms.
 - `.env` - local environment variables. This file should not be pushed to GitHub.
 
 ## How It Works
@@ -427,7 +413,7 @@ flask --app app run
 
 ## Production Deployment
 
-The project includes a Gunicorn command in `Procfile.txt`:
+The project includes a Gunicorn command in `Procfile`:
 
 ```text
 web: gunicorn --bind :$PORT app:app
@@ -438,11 +424,6 @@ For platforms such as Heroku or Render, the file usually needs to be named exact
 ```text
 Procfile
 ```
-
-not `Procfile.txt`.
-
-Because `app.py` is inside `StyleXfer_NST_code/`, deployment should run from that folder or configure the working directory correctly.
-
 
 ## Routes
 
@@ -482,12 +463,8 @@ Because `app.py` is inside `StyleXfer_NST_code/`, deployment should run from tha
 - Add drag-and-drop upload UI
 - Add before/after comparison slider
 - Add multiple predefined style presets
-- Add batch style transfer
 - Add download options for different output sizes
 - Add Docker support for easier deployment
-- Move model checkpoints to Hugging Face Hub or GitHub Releases
-- Add unit tests for utilities and model loading
-- Add a dedicated `/health` route for deployment monitoring
 
 ## Learning Outcomes
 
@@ -501,5 +478,3 @@ This project demonstrates:
 - training a decoder for neural style transfer
 - using feature statistics for style representation
 - managing model checkpoints
-- preparing a project for GitHub and deployment
-- combining frontend, backend, and deep learning code in one project
