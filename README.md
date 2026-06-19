@@ -1,4 +1,4 @@
-# StyleXfer: Adaptive Neural Style Transfer With AdaIN
+# StyleXfer: Adaptive Neural Style Transfer
 
 ![Platform](https://img.shields.io/badge/Platform-Web-blue)
 ![Framework](https://img.shields.io/badge/Framework-Flask-green)
