@@ -9,6 +9,12 @@
 # Here in this file, we will write the code of our frontend of our Webapp actually by using the Flask
 # This file is essentially a Flask web application that provides a user interface for running our Neural Style Transfer (NST) model using AdaIN. 
 
+import sys
+from pathlib import Path
+
+# Add parent directory to Python path so imports work from any location
+sys.path.insert(0, str(Path(__file__).parent.parent)) 
+
 
 
 
@@ -177,17 +183,19 @@ class UploadForm(FlaskForm):    # Creates a custom form by inheriting from Flask
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-
+# Get the directory where this app.py file is located (absolute path)
+app_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Creates an instance of your VGGEncoder class.
 # Loads pretrained weights from the file vgg_normalised.pth (a VGG model trained on ImageNet, normalized for style transfer).
-encoder = VGGEncoder('vgg_normalised.pth').to(device)
+# Uses absolute paths so it works regardless of where gunicorn runs from
+encoder = VGGEncoder(os.path.join(app_dir, 'vgg_normalised.pth')).to(device)
 decoder = Decoder().to(device)
 
 # Loads the trained weights for the decoder from the file decoder_final.pth.
-# This means your decoder has already been trained to reconstruct images, so you don’t start from scratch.
+# This means your decoder has already been trained to reconstruct images, so you don't start from scratch.
 # After this, the encoder provides features, AdaIN adjusts them, and the decoder rebuilds the final stylized image.
-decoder.load_state_dict(torch.load('experiment/final_training/decoder_final.pth', map_location=device))
+decoder.load_state_dict(torch.load(os.path.join(app_dir, 'experiment/final_training/decoder_final.pth'), map_location=device))
 
 
 # Switches the model from training mode to evaluation mode.

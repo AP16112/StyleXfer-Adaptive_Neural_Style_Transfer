@@ -35,8 +35,11 @@
 # Applies AdaIN to fuse content + style features.
 # Trains the decoder to reconstruct stylized images.
 # Logs progress and saves checkpoints + sample outputs.
+import sys
+from pathlib import Path
 
-
+# Add parent directory to Python path so imports work from any location
+sys.path.insert(0, str(Path(__file__).parent.parent))
 import argparse    # importing Python’s argparse module, which is part of the standard library.
 # It lets us define the command‑line arguments for our script (like --epochs, --batch_size, --content_dir).
 # When we run our script from the terminal, we can pass in values without editing the code.
