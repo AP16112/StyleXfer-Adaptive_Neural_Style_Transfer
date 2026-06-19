@@ -16,6 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent)) 
 
 
+from huggingface_hub import hf_hub_download
 
 
 # import os → lets you interact with the operating system, including reading environment variables.
@@ -40,7 +41,7 @@ load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 # - values → extra arguments like filenames or route parameters.
 # send_from_directory :- Serves files directly from a folder (like images, downloads, or generated outputs).
 # e.g return send_from_directory("uploads", filename)
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory, send_file
 
 # Here we are importing FlaskForm from the flask_wtf package, which is an extension that integrates WTForms with Flask.
 # FlaskForm :- It’s a base class used to create web forms in Flask applications.
@@ -425,8 +426,17 @@ def send_image(filename):
 @app.route('/examples/<path:filename>')
 def send_example(filename):
     # Use absolute path to examples folder, relative to this app.py file location
-    examples_folder = os.path.join(app_dir, 'examples')
-    return send_from_directory(examples_folder, filename)
+    # examples_folder = os.path.join(app_dir, 'examples')
+    # return send_from_directory(examples_folder, filename)
+    
+    # Download the requested file from your dataset repo
+    # Explicitly tell Hugging Face this is a dataset repo
+    file_path = hf_hub_download(
+        repo_id="Arpit16112/StyleXfer-examples",
+        filename=filename,
+        repo_type="dataset"   # <-- critical fix
+    )
+    return send_file(file_path)
 
 
 
