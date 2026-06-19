@@ -229,16 +229,16 @@ def allowed_file(filename):
 # alpha: blending strength between content and style.
 def style_transfer(content_image, style_image, encoder, decoder, alpha, device):
     # Creates a preprocessing pipeline for the content image using torchvision.transforms.
-    # transforms.Resize(512) → resizes the image so its shorter side is 512 pixels (standardizing input size).
+    # transforms.Resize(256) → resizes the image to 256px (reduced from 512 for memory efficiency on Render)
     # transforms.ToTensor() → converts the image into a PyTorch tensor (shape [C, H, W] with values in [0,1]).
     content_transform = transforms.Compose([
-        transforms.Resize(512),
+        transforms.Resize(256),
         transforms.ToTensor()
     ])
 
 
     style_transform = transforms.Compose([
-        transforms.Resize(512),
+        transforms.Resize(256),
         transforms.ToTensor()
     ])
 
@@ -426,7 +426,9 @@ def send_image(filename):
 # Example: /examples/styles/starry_night.jpg → filename = "styles/starry_night.jpg".
 @app.route('/examples/<path:filename>')
 def send_example(filename):
-    return send_from_directory('examples', filename)
+    # Use absolute path to examples folder, relative to this app.py file location
+    examples_folder = os.path.join(app_dir, 'examples')
+    return send_from_directory(examples_folder, filename)
 
 
 
