@@ -117,7 +117,7 @@ The application supports:
 - static example gallery
 - loading configuration from `.env`
 - local development server through Flask/Werkzeug
-- production startup through Gunicorn
+- production deployment through Docker on Hugging Face Spaces
 
 ## Key Features
 
@@ -143,7 +143,6 @@ The application supports:
 - Pillow
 - NumPy
 - tqdm
-- Gunicorn
 - python-dotenv
 
 ## Project Structure
@@ -467,18 +466,20 @@ flask --app app run
 - Provides a complete Flask web app around the ML pipeline
 - Has a clean user workflow with previews, slider control, output display, and download
 - Includes sample examples for quick demonstration
-- Supports local development and production-style Gunicorn startup
+- Supports local development with Flask/Werkzeug
+- Production-ready Docker deployment on Hugging Face Spaces
+- Easily portable to other Docker-compatible platforms
 
 ## Limitations
 
-- Inference speed depends heavily on CPU/GPU availability.
-- Large images may take longer to process.
-- The app currently saves uploads and outputs to local disk.
-- There is no database or user account system.
-- Uploaded files are not automatically cleaned up.
-- Only image files with `png`, `jpg`, and `jpeg` extensions are accepted.
-- Model files must be present locally before running the app.
-- The current `Procfile.txt` may need to be renamed to `Procfile` for some deployment platforms.
+- Inference speed depends heavily on CPU/GPU availability
+- Large images may take longer to process
+- The app currently saves uploads and outputs to local disk
+- There is no database or user account system
+- Uploaded files are not automatically cleaned up
+- Only image files with `png`, `jpg`, and `jpeg` extensions are accepted
+- Model files must be present locally before running the app
+- Docker deployment requires sufficient resource quotas on Hugging Face Spaces
 
 ## Deployment
 
