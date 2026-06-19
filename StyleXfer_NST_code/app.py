@@ -334,7 +334,7 @@ def index():
 
     # Checks if the form was submitted (POST) and passed validation (all required fields are filled, CSRF token is valid, etc.).
     # This is a Flask‑WTF helper that combines request.method == 'POST' and form.validate().
-    if form.validate_on_submit():
+    if request.method == 'POST':
         # Ensures the user actually uploaded a content image file.  
         # form.content.data → the uploaded file object.
         # .filename → the name of the uploaded file
@@ -375,7 +375,7 @@ def index():
                 content_image = Image.open(content_path).convert('RGB')
                 style_image = Image.open(style_path).convert('RGB')
 
-                alpha = float(form.alpha.data)
+                alpha = float(request.form.get('alpha', form.alpha.data or 1.0))
 
                 stylized_image = style_transfer(content_image, style_image, encoder, decoder, alpha, device)
 
@@ -395,13 +395,6 @@ def index():
                 error = 'Please upload content image'
             elif not style_filename:
                 error = 'Please upload style image'
-    elif request.method == 'POST':
-        if not content_filename and not style_filename:
-            error = 'Please upload both content and style images'
-        elif not content_filename:
-            error = 'Please upload content image'
-        elif not style_filename:
-            error = 'Please upload style image'
 
 
     # Tells Flask to render the index.html file from your templates/ folder. This is the page the user sees in their browser.
