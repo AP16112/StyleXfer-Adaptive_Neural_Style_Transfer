@@ -40,5 +40,5 @@ venv/
 StyleXfer_NST_code/content_dataset/
 StyleXfer_NST_code/style_dataset/
 
-StyleXfer_NST_code/static/
-StyleXfer_NST_code/examples/
+# StyleXfer_NST_code/static/
+# StyleXfer_NST_code/examples/
