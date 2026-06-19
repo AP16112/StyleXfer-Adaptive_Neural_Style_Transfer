@@ -134,7 +134,6 @@ app = Flask(__name__)
 
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-change-in-production')
-app.config['UPLOAD_FOLDER'] = os.environ.get('UPLOAD_FOLDER', 'static/uploads')
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg'}
 # SECRET_KEY :-
 # Used by Flask to secure sessions and forms.
@@ -161,7 +160,6 @@ Bootstrap(app)
 # os.makedirs creates directories recursively (so if parent folders don’t exist, they’ll be created too).
 # The parameter exist_ok=True prevents errors if the folder already exists — it simply does nothing in that case.
 # This ensures your app always has a safe place to store uploaded files before you try saving them.
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # app.config
 # It’s a dictionary‑like object that stores configuration settings for your Flask application.
@@ -185,6 +183,13 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Get the directory where this app.py file is located (absolute path)
 app_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Keep uploads inside this Flask package even when Gunicorn starts from the repo root.
+app.config['UPLOAD_FOLDER'] = os.environ.get(
+    'UPLOAD_FOLDER',
+    os.path.join(app_dir, 'static', 'uploads')
+)
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # Creates an instance of your VGGEncoder class.
 # Loads pretrained weights from the file vgg_normalised.pth (a VGG model trained on ImageNet, normalized for style transfer).
