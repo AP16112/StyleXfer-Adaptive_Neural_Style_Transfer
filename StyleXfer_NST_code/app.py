@@ -447,3 +447,25 @@ if __name__ == '__main__':
 # python app.py
 # ----------OR--------
 # flask --app app run 
+
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Here we will write this process definition inside the Procfile.txt actually.
+# Here it is a process definition in a Procfile (used by Heroku and similar platforms) that tells the platform how to start your web service.
+# web: gunicorn --bind :$PORT app:app
+
+# web :- Defines the process type.
+# web is special: it means this process will handle HTTP requests. Heroku (and Render, if you use it) expects at least one web process for a web app.
+
+# gunicorn :- A production‑grade WSGI HTTP server for Python apps. It’s faster and more robust than running python app.py directly.
+# Commonly used to serve Flask, Django, and FastAPI apps in production.
+
+# --bind :$PORT :- Tells Gunicorn to bind to the port provided by the platform.
+# $PORT is an environment variable automatically set by Heroku/Render.
+# You don’t hardcode 5000 or 8000 because the platform dynamically assigns a port.
+
+# app:app :- Refers to your Python file and the Flask app object inside it.
+# First app → the filename (app.py).
+# Second app → the Flask application instance inside that file:
+# from flask import Flask
+# app = Flask(__name__)
