@@ -24,10 +24,19 @@ tags:
 ![Model](https://img.shields.io/badge/Model-AdaIN-orange)
 ![Language](https://img.shields.io/badge/Language-Python%203.x-yellow)
 ![Status](https://img.shields.io/badge/Status-Portfolio%20Project-success)
+![Deployment](https://img.shields.io/badge/Deployed-Hugging%20Face-brightgreen)
 
 StyleXfer is a Flask-based web application for **Adaptive Neural Style Transfer** using **AdaIN**. It lets a user upload a content image and a style image, choose the style strength, and generate a new image that preserves the structure of the content image while adopting the color, texture, and artistic statistics of the style image.
 
 The project combines a pretrained VGG encoder, a trained decoder network, PyTorch image processing, and a responsive Bootstrap/Jinja web interface. It also includes the training script used to train the decoder and sample content/style/example images for demonstration.
+
+## 🚀 Live Demo
+
+**Try StyleXfer Online:** [https://arpit16112-stylexfer.hf.space/](https://arpit16112-stylexfer.hf.space/)
+
+The application is deployed on Hugging Face Spaces using Docker. Upload your images and generate stylized outputs instantly!
+
+---
 
 ## Overview
 
@@ -48,28 +57,28 @@ The application is useful as:
 - a Flask plus PyTorch deployment example
 - a training and inference pipeline for encoder-decoder image generation
 
-## Demo
-
 ### AdaIN Architecture
 
 ![AdaIN Algorithm](StyleXfer_NST_code/adain_algorithm.png)
 
-### Example Inputs And Outputs
+Adaptive Instance Normalization transfers style by aligning channel-wise feature statistics between content and style representations.
 
-The app includes example files in `StyleXfer_NST_code/examples/`:
+### Example Images
 
-- `brad_pitt.jpg` as a sample content image
-- `sketch.png` as a sample sketch style
-- `picasso_seated_nude_hr.jpg` as a sample painting style
-- `stylized_brad_pitt.jpg` and `stylized_brad_pitt (1).jpg` as generated outputs
-
-These examples are served through the Flask route:
+The app includes example files in `StyleXfer_NST_code/examples/` that are served through the Flask route:
 
 ```python
 @app.route('/examples/<path:filename>')
 def send_example(filename):
     return send_from_directory('examples', filename)
 ```
+
+**Note:** The example images displayed on the home page are sourced from a Hugging Face dataset repository where they have been uploaded for easy access and demonstration purposes.
+
+- `brad_pitt.jpg` as a sample content image
+- `sketch.png` as a sample sketch style  
+- `picasso_seated_nude_hr.jpg` as a sample painting style
+- Generated stylized outputs
 
 ## Why This Project
 
@@ -335,14 +344,14 @@ python train.py --batch_size 16 --epochs 160 --experiment final_training
 ### Resume Training
 
 ```bash
-python train.py ^
-  --batch_size 8 ^
-  --epochs 200 ^
-  --experiment final_training ^
-  --final_size 512 ^
-  --style_weight 10 ^
-  --resume ^
-  --decoder_path experiment/final_training/decoder_160.pth ^
+python train.py 
+  --batch_size 8 
+  --epochs 200 
+  --experiment final_training 
+  --final_size 512 
+  --style_weight 10 
+  --resume 
+  --decoder_path experiment/final_training/decoder_160.pth 
   --optimizer_path experiment/final_training/optimizer_160.pth
 ```
 
@@ -428,19 +437,6 @@ cd StyleXfer_NST_code
 flask --app app run
 ```
 
-## Production Deployment
-
-The project includes a Gunicorn command in `Procfile`:
-
-```text
-web: gunicorn --bind :$PORT app:app
-```
-
-For platforms such as Heroku or Render, the file usually needs to be named exactly:
-
-```text
-Procfile
-```
 
 ## Routes
 
@@ -473,6 +469,24 @@ Procfile
 - Model files must be present locally before running the app.
 - The current `Procfile.txt` may need to be renamed to `Procfile` for some deployment platforms.
 
+## Deployment
+
+### Docker Deployment (Hugging Face Spaces)
+
+The project is deployed on Hugging Face Spaces using Docker:
+
+```bash
+# Build the Docker image
+docker build -t stylexfer .
+
+# Run the container
+docker run -p 7860:7860 stylexfer
+```
+
+The Dockerfile uses Python 3.12-slim and runs the Flask app on port 7860, which is the standard port for Hugging Face Spaces.
+
+**Live URL:** [https://arpit16112-stylexfer.hf.space/](https://arpit16112-stylexfer.hf.space/)
+
 ## Future Improvements
 
 - Add automatic cleanup for old uploaded/generated images
@@ -481,7 +495,8 @@ Procfile
 - Add before/after comparison slider
 - Add multiple predefined style presets
 - Add download options for different output sizes
-- Add Docker support for easier deployment
+- Add WebGL-based client-side inference for faster processing
+- Add style presets and favorites system
 
 ## Learning Outcomes
 
