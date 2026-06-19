@@ -1,5 +1,5 @@
 ---
-title: StyleXfer : Adaptive Neural Style Transfer
+title: StyleXfer - Adaptive Neural Style Transfer
 emoji: 🎨
 colorFrom: indigo
 colorTo: purple
