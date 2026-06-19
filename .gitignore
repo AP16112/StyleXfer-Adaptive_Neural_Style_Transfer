@@ -1,0 +1,37 @@
+# A .gitignore file is used in Git projects to tell Git which files or folders it should ignore (not track in version control). This is especially useful for things like:
+# Temporary files (*.log, *.tmp)
+# Build artifacts (/dist, /build)
+# Virtual environments (venv/, .venv/)
+# Sensitive files (.env, API keys, credentials)
+# OS‑specific junk (.DS_Store, Thumbs.db)
+
+# In this we write those files and folders which we don't want to push on github generally.
+
+
+.env
+.env.*
+!.env.example
+
+
+.vscode     
+# it stores temporary files of vscode
+
+
+*.pyc      
+# it store all the runtime cache files of python, so we don't need to push this on github
+
+.DS_Store    
+# it is for mac users
+
+__pycache__/    
+# here / means folder i.e __pycache__ folder
+
+*.py[cod]
+.pytest_cache/
+
+venv/
+
+
+# Logs
+*.log
+
