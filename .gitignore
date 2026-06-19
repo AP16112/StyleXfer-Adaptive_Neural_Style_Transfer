@@ -35,3 +35,8 @@ venv/
 # Logs
 *.log
 
+
+# Adding both content & style dataset folder
+StyleXfer_NST_code/content_dataset/
+StyleXfer_NST_code/style_dataset/
+
