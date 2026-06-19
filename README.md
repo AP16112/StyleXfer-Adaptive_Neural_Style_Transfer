@@ -1,20 +1,3 @@
----
-title: StyleXfer - Adaptive Neural Style Transfer
-emoji: 🎨
-colorFrom: indigo
-colorTo: purple
-sdk: docker
-sdk_version: 0.0.1
-app_file: StyleXfer_NST_code/app.py
-pinned: false
-python_version: '3.12'
-tags:
-- neural-style-transfer
-- computer-vision
-- deep-learning
-- huggingface-spaces
----
-
 # StyleXfer: Adaptive Neural Style Transfer
 
 ![Platform](https://img.shields.io/badge/Platform-Web-blue)
@@ -56,6 +39,19 @@ The application is useful as:
 - a practical implementation of AdaIN neural style transfer
 - a Flask plus PyTorch deployment example
 - a training and inference pipeline for encoder-decoder image generation
+
+## Demo
+
+### Live Application Screenshots
+
+#### Home Page
+![Home Page](assets/home.png)
+
+#### Examples Gallery
+![Examples Gallery](assets/examples.png)
+
+#### Stylized Output
+![Stylized Output](assets/stylized_image.png)
 
 ### AdaIN Architecture
 
