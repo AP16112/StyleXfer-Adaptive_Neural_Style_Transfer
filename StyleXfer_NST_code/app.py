@@ -113,9 +113,9 @@ import io
 
 # Import our existing AdaIN code 
 # Here we are importing these VGGEncoder & Decoder classes from the models.py file of utils folder
-from utils.models import VGGEncoder, Decoder
+from StyleXfer_NST_code.utils.models import VGGEncoder, Decoder
 # Here we are importing these functions from utils.py file
-from utils.utils import adaptive_instance_normalization, calc_mean_std
+from StyleXfer_NST_code.utils.utils import adaptive_instance_normalization, calc_mean_std
 
 
 

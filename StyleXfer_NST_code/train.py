@@ -60,9 +60,9 @@ from pathlib import Path
 
 
 # Here we are importing everything i.e classes or functions etc from the utils.py file present inside the utils folder 
-from utils.utils import *
+from StyleXfer_NST_code.utils.utils import *
 # Here we are importing everything i.e classes or functions etc from the models.py file present inside the utils folder 
-from utils.models import *
+from StyleXfer_NST_code.utils.models import *
 
 # tqdm is a Python library that gives you progress bars for loops
 from tqdm import tqdm
