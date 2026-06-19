@@ -371,7 +371,14 @@ def index():
                 result_image = result_filename
             except Exception as e:
                 error = str(e)
-    else:
+        else:
+            if not content_filename and not style_filename:
+                error = 'Please upload both content and style images'
+            elif not content_filename:
+                error = 'Please upload content image'
+            elif not style_filename:
+                error = 'Please upload style image'
+    elif request.method == 'POST':
         if not content_filename and not style_filename:
             error = 'Please upload both content and style images'
         elif not content_filename:
