@@ -15,6 +15,10 @@
 # import os → lets you interact with the operating system, including reading environment variables.
 import os
 import torch
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 # Here we are importing several useful components from Flask, the Python web framework
 # Flask :- The main class used to create your web application.
@@ -123,8 +127,8 @@ app = Flask(__name__)
 # This app object is the central piece: it handles incoming requests and sends back responses.
 
 
-app.config['SECRET_KEY'] = 'supersecretkey'
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-change-in-production')
+app.config['UPLOAD_FOLDER'] = os.environ.get('UPLOAD_FOLDER', 'static/uploads')
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg'}
 # SECRET_KEY :-
 # Used by Flask to secure sessions and forms.
@@ -426,6 +430,10 @@ if __name__ == '__main__':
     # run_simple is a lightweight way to start a WSGI server for development.
     from werkzeug.serving import run_simple
 
+    # Load host and port from environment variables
+    host = os.environ.get('FLASK_HOST', 'localhost')
+    port = int(os.environ.get('FLASK_PORT', 5000))
+    
     # Starts the Flask app on host localhost and port 5000.
     # Parameters explained:
     # 'localhost' → binds the server to your local machine only (not accessible externally).
@@ -433,7 +441,7 @@ if __name__ == '__main__':
     # app → the Flask application object you defined earlier.
     # use_reloader=True → automatically restarts the server when you change code files (hot reload).
     # use_debugger=True → enables the interactive debugger, so if an error occurs you get detailed debug info in the browser.
-    run_simple('localhost', 5000, app, use_reloader=True, use_debugger=True)
+    run_simple(host, port, app, use_reloader=True, use_debugger=True)
 
 # Every Python file has a special built‑in variable called __name__.
 # If the file is being run directly (e.g., python train.py), then __name__ is set to "__main__".
